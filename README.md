@@ -20,7 +20,7 @@ A simple, stylish, and functional calculator web application built with **HTML**
 ---
 
 ## 🌐 Live Demo
-Experience it in action:  
+Experience it in action: https://quangthoit.github.io/Calculator/ 
 
 ---
 

@@ -63,6 +63,11 @@ function flushOperator(intBuffer) {
   } else if (previousOperator === "×") {
     runTotal *= intBuffer;
   } else if (previousOperator === "÷") {
+    if (intBuffer === 0) {
+      runTotal = "Error";
+    } else {
+      runTotal /= intBuffer;
+    }
     runTotal /= intBuffer;
   }
 }

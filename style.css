@@ -82,8 +82,5 @@ body {
   background-color: rgb(255, 249, 241);
 }
 .double {
-  flex-basis: 45%;
-}
-.triple {
-  flex-basis: 75%;
+  flex-basis:47%;
 }

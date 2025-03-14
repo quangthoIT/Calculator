@@ -2,8 +2,9 @@ let runTotal = 0;
 let buffer = "0";
 let previousOperator;
 const screen = document.querySelector(".screen");
+
 function buttonClick(value) {
-  if (isNaN(value)) {
+  if (isNaN(value) && value !== ".") {
     handleSymbol(value);
   } else {
     handleNumber(value);
@@ -21,7 +22,7 @@ function handleSymbol(symbol) {
       if (previousOperator === null) {
         return;
       }
-      flushOperator(parseInt(buffer));
+      flushOperator(parseFloat(buffer));
       previousOperator = null;
       buffer = runTotal;
       runTotal = 0;
@@ -42,42 +43,49 @@ function handleSymbol(symbol) {
   }
   screen.innerText = buffer;
 }
+
 function handleMath(symbol) {
   if (buffer === "0") {
     return;
   }
-  const intBuffer = parseInt(buffer);
+  const floatBuffer = parseFloat(buffer);
   if (runTotal === 0) {
-    runTotal = intBuffer;
+    runTotal = floatBuffer;
   } else {
-    flushOperator(intBuffer);
+    flushOperator(floatBuffer);
   }
   previousOperator = symbol;
   buffer = "0";
 }
-function flushOperator(intBuffer) {
+
+function flushOperator(floatBuffer) {
   if (previousOperator === "+") {
-    runTotal += intBuffer;
+    runTotal += floatBuffer;
   } else if (previousOperator === "−") {
-    runTotal -= intBuffer;
+    runTotal -= floatBuffer;
   } else if (previousOperator === "×") {
-    runTotal *= intBuffer;
+    runTotal *= floatBuffer;
   } else if (previousOperator === "÷") {
-    if (intBuffer === 0) {
+    if (floatBuffer === 0) {
       runTotal = "Error";
     } else {
-      runTotal /= intBuffer;
+      runTotal /= floatBuffer;
     }
-    runTotal /= intBuffer;
+    runTotal /= floatBuffer;
   }
 }
+
 function handleNumber(numberString) {
-  if (buffer === "0") {
+  if (numberString === "." && buffer.includes(".")) {
+    return;
+  }
+  if (buffer === "0" && numberString !== ".") {
     buffer = numberString;
   } else {
     buffer += numberString;
   }
 }
+
 function init() {
   document.querySelector(".calc-buttons").addEventListener("click", function (event) {
     buttonClick(event.target.innerText);

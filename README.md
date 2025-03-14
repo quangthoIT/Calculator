@@ -17,6 +17,10 @@ A simple, stylish, and functional calculator web application built with **HTML**
 - **Responsive Layout**: Looks great on desktops, tablets, and phones.  
 - **Smart Error Handling**: Shows "Error" if you try to divide by zero.
 
+## ⚠️ Limitations
+- **Work in Progress**: The calculator hasn’t reached peak performance—optimization for speed and complex calculations is still on the to-do list.
+- **Function & Format**: Lacks polish in number formatting and misses advanced features (like percentages or memory), keeping it raw and basic for now.
+
 ---
 
 ## 🌐 Live Demo

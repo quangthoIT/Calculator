@@ -72,6 +72,7 @@ function flushOperator(floatBuffer) {
       runTotal /= floatBuffer;
     }
   }
+  
   if (typeof runTotal !== "string") {
     runTotal = parseFloat(runTotal.toFixed(12));
   }

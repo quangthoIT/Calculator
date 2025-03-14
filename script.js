@@ -24,7 +24,7 @@ function handleSymbol(symbol) {
       }
       flushOperator(parseFloat(buffer));
       previousOperator = null;
-      buffer = runTotal;
+      buffer = formatResult(runTotal);
       runTotal = 0;
       break;
     case "←":
@@ -71,7 +71,9 @@ function flushOperator(floatBuffer) {
     } else {
       runTotal /= floatBuffer;
     }
-    runTotal /= floatBuffer;
+  }
+  if (typeof runTotal !== "string") {
+    runTotal = parseFloat(runTotal.toFixed(12));
   }
 }
 
@@ -79,11 +81,20 @@ function handleNumber(numberString) {
   if (numberString === "." && buffer.includes(".")) {
     return;
   }
-  if (buffer === "0" && numberString !== ".") {
-    buffer = numberString;
-  } else {
-    buffer += numberString;
+
+  let newBuffer = buffer === "0" && numberString !== "." ? numberString : buffer + numberString;
+  if (newBuffer.includes(".")) {
+    const decimalPart = newBuffer.split(".")[1];
+    if (decimalPart && decimalPart.length > 12) {
+      return;
+    }
   }
+  buffer = newBuffer;
+}
+
+function formatResult(value) {
+  if (typeof value === "string") return value;
+  return parseFloat(value.toFixed(12)).toString();
 }
 
 function init() {
